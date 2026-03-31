@@ -14,6 +14,7 @@ import type {
 } from '../game/types';
 import {
   GAME_CONSTANTS,
+  ASSET_PATHS,
 } from '../game/constants';
 import {
   generateId,
@@ -171,7 +172,7 @@ export function useGameEngine(options: UseGameEngineOptions = {}) {
 
   // Load wave data
   useEffect(() => {
-    fetch('/assets/json/waves.json')
+    fetch(`${ASSET_PATHS.json}waves.json`)
       .then(res => res.json())
       .then((data: WaveData) => {
         setWaveData(data);

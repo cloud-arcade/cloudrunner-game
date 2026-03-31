@@ -47,10 +47,13 @@ export const GAME_CONSTANTS = {
   SPAWN_DENSITY_FACTOR: 0.8, // Higher = more items on larger screens
 } as const;
 
+// Use Vite's BASE_URL for correct asset paths in production (GitHub Pages)
+const BASE_URL = import.meta.env.BASE_URL || '/';
+
 export const ASSET_PATHS = {
-  icons: '/assets/icons/',
-  background: '/assets/background/',
-  json: '/assets/json/',
+  icons: `${BASE_URL}assets/icons/`,
+  background: `${BASE_URL}assets/background/`,
+  json: `${BASE_URL}assets/json/`,
 } as const;
 
 export const PLAYER_MOOD_ICONS: Record<string, string> = {
