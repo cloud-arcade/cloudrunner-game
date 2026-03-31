@@ -9,10 +9,9 @@ import { Button } from '../ui/Button';
 interface MenuScreenProps {
   onStartGame: () => void;
   highScore: number;
-  isPlatformConnected: boolean;
 }
 
-export function MenuScreen({ onStartGame, highScore, isPlatformConnected }: MenuScreenProps) {
+export function MenuScreen({ onStartGame, highScore }: MenuScreenProps) {
   return (
     <div 
       className="absolute inset-0 flex flex-col items-center justify-center"

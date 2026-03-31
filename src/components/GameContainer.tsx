@@ -25,7 +25,6 @@ export function GameContainer() {
   const [lastWaveReached, setLastWaveReached] = useState(0);
   
   const { 
-    isConnected, 
     startSession, 
     endSession, 
     submitScore, 
@@ -125,7 +124,6 @@ export function GameContainer() {
         <MenuScreen
           onStartGame={handleStartGame}
           highScore={highScore}
-          isPlatformConnected={isConnected}
         />
       )}
       
