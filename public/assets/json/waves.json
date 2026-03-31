@@ -1,0 +1,255 @@
+{
+  "config": {
+    "baseFallDuration": 3000,
+    "waveDuration": 25000,
+    "waveBreakDuration": 5000,
+    "specialItemDelay": 3000,
+    "playerSpeed": 8,
+    "baseScorePerWave": 100
+  },
+  "abilities": {
+    "freeze": {
+      "id": "freeze",
+      "name": "Freeze",
+      "description": "Stops all falling items for 3 seconds",
+      "duration": 3000,
+      "icon": "freeze.png"
+    },
+    "sunny": {
+      "id": "sunny",
+      "name": "Clear Sky",
+      "description": "Removes all items currently on screen",
+      "duration": 0,
+      "icon": "sunny.png"
+    },
+    "umbrella": {
+      "id": "umbrella",
+      "name": "Shield",
+      "description": "Become invincible for 8 seconds",
+      "duration": 8000,
+      "icon": "umbrella.png"
+    },
+    "doggyLife": {
+      "id": "doggyLife",
+      "name": "Golden Heart",
+      "description": "Protects you from losing one life",
+      "duration": -1,
+      "icon": "doggy-life.png"
+    },
+    "invincible": {
+      "id": "invincible",
+      "name": "Invincible",
+      "description": "LEGENDARY! Glowing aura, power crystals attracted to you!",
+      "duration": 10000,
+      "icon": "character-happy.png"
+    }
+  },
+  "itemTypes": {
+    "raindrop": {
+      "id": "raindrop",
+      "name": "Raindrop",
+      "icon": "drop.png",
+      "size": 24,
+      "damage": 1,
+      "scoreValue": 0,
+      "effect": "damage"
+    },
+    "power": {
+      "id": "power",
+      "name": "Power Crystal",
+      "icon": "power.png",
+      "size": 28,
+      "damage": 0,
+      "scoreValue": 25,
+      "effect": "score"
+    },
+    "health": {
+      "id": "health",
+      "name": "Heart",
+      "icon": "heart-full.png",
+      "size": 28,
+      "damage": 0,
+      "scoreValue": 10,
+      "effect": "heal"
+    },
+    "acidRain": {
+      "id": "acidRain",
+      "name": "Acid Rain",
+      "icon": "acid-rain.png",
+      "size": 48,
+      "damage": 3,
+      "scoreValue": 0,
+      "effect": "instantKill"
+    },
+    "ability": {
+      "id": "ability",
+      "name": "Mystery Box",
+      "icon": "random-ability.png",
+      "size": 36,
+      "damage": 0,
+      "scoreValue": 15,
+      "effect": "grantAbility"
+    },
+    "trap": {
+      "id": "trap",
+      "name": "Fake Power",
+      "icon": "trap-power.png",
+      "size": 28,
+      "damage": 1,
+      "scoreValue": 0,
+      "effect": "damage"
+    }
+  },
+  "waves": [
+    {
+      "id": 1,
+      "name": "Gentle Drizzle",
+      "spawnInterval": 650,
+      "fallSpeedMultiplier": 1.0,
+      "spawnRates": {
+        "raindrop": 1.00,
+        "power": 0.00,
+        "health": 0.00,
+        "acidRain": 0.00,
+        "ability": 0.00,
+        "trap": 0.00
+      },
+      "waveBonus": 100
+    },
+    {
+      "id": 2,
+      "name": "Light Rain",
+      "spawnInterval": 580,
+      "fallSpeedMultiplier": 1.07,
+      "spawnRates": {
+        "raindrop": 0.90,
+        "power": 0.10,
+        "health": 0.00,
+        "acidRain": 0.00,
+        "ability": 0.00,
+        "trap": 0.00
+      },
+      "waveBonus": 150
+    },
+    {
+      "id": 3,
+      "name": "Steady Showers",
+      "spawnInterval": 520,
+      "fallSpeedMultiplier": 1.14,
+      "spawnRates": {
+        "raindrop": 0.85,
+        "power": 0.10,
+        "health": 0.00,
+        "acidRain": 0.00,
+        "ability": 0.00,
+        "trap": 0.05
+      },
+      "waveBonus": 200
+    },
+    {
+      "id": 4,
+      "name": "Heavy Rain",
+      "spawnInterval": 460,
+      "fallSpeedMultiplier": 1.21,
+      "spawnRates": {
+        "raindrop": 0.78,
+        "power": 0.11,
+        "health": 0.04,
+        "acidRain": 0.00,
+        "ability": 0.00,
+        "trap": 0.07
+      },
+      "waveBonus": 250
+    },
+    {
+      "id": 5,
+      "name": "Downpour",
+      "spawnInterval": 400,
+      "fallSpeedMultiplier": 1.28,
+      "spawnRates": {
+        "raindrop": 0.68,
+        "power": 0.12,
+        "health": 0.05,
+        "acidRain": 0.00,
+        "ability": 0.06,
+        "trap": 0.09
+      },
+      "waveBonus": 300
+    },
+    {
+      "id": 6,
+      "name": "Torrent",
+      "spawnInterval": 350,
+      "fallSpeedMultiplier": 1.35,
+      "spawnRates": {
+        "raindrop": 0.60,
+        "power": 0.13,
+        "health": 0.06,
+        "acidRain": 0.00,
+        "ability": 0.08,
+        "trap": 0.10
+      },
+      "waveBonus": 400
+    },
+    {
+      "id": 7,
+      "name": "Storm",
+      "spawnInterval": 300,
+      "fallSpeedMultiplier": 1.42,
+      "spawnRates": {
+        "raindrop": 0.52,
+        "power": 0.14,
+        "health": 0.07,
+        "acidRain": 0.03,
+        "ability": 0.10,
+        "trap": 0.10
+      },
+      "waveBonus": 500
+    },
+    {
+      "id": 8,
+      "name": "Thunder Storm",
+      "spawnInterval": 260,
+      "fallSpeedMultiplier": 1.49,
+      "spawnRates": {
+        "raindrop": 0.46,
+        "power": 0.14,
+        "health": 0.08,
+        "acidRain": 0.05,
+        "ability": 0.10,
+        "trap": 0.10
+      },
+      "waveBonus": 600
+    },
+    {
+      "id": 9,
+      "name": "Monsoon",
+      "spawnInterval": 220,
+      "fallSpeedMultiplier": 1.56,
+      "spawnRates": {
+        "raindrop": 0.42,
+        "power": 0.15,
+        "health": 0.08,
+        "acidRain": 0.07,
+        "ability": 0.10,
+        "trap": 0.10
+      },
+      "waveBonus": 750
+    },
+    {
+      "id": 10,
+      "name": "Typhoon",
+      "spawnInterval": 180,
+      "fallSpeedMultiplier": 1.63,
+      "spawnRates": {
+        "raindrop": 0.40,
+        "power": 0.15,
+        "health": 0.08,
+        "acidRain": 0.09,
+        "ability": 0.10,
+        "trap": 0.10
+      },
+      "waveBonus": 1000
+    }
+  ]
+}
