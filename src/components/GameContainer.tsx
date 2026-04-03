@@ -87,6 +87,18 @@ export function GameContainer() {
     }
   }, [isReady, screen]);
   
+  // Auto-pause when window loses focus
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && screen === 'playing') {
+        togglePause();
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [screen, togglePause]);
+  
   // Handle pause state
   useEffect(() => {
     if (gameState.isPaused && screen === 'playing') {

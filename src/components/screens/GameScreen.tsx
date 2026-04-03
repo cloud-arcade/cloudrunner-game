@@ -348,7 +348,8 @@ export function GameScreen({
             {/* Instructions hint */}
             <div className="text-center mt-2">
               <span className="text-[10px] text-white/40">
-                Click or drag abilities • Arrow keys or A/D to move • ESC to pause
+                <span className="hidden sm:inline">Click or drag abilities • Arrow keys or A/D to move • ESC to pause</span>
+                <span className="inline sm:hidden">Tap abilities • Drag to move • ESC to pause</span>
               </span>
             </div>
           </div>
