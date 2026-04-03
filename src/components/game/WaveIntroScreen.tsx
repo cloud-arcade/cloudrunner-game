@@ -213,28 +213,30 @@ export function WaveIntroScreen({ wave, onComplete }: WaveIntroScreenProps) {
   };
   
   return (
-    <div className="absolute inset-0 flex items-center justify-center z-50">
+    <div className="absolute inset-0 flex items-center justify-center z-50 overflow-hidden">
       {/* Solid background - no blur or pulse */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-800/95 to-slate-900/95" />
       
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-lg">
+      {/* Scrollable Content Container */}
+      <div className="relative z-10 w-full h-full overflow-y-auto overflow-x-hidden">
+        <div className="min-h-full flex items-center justify-center text-center px-4 py-8 sm:px-6">
+        <div className="w-full max-w-lg">
         {/* Wave number - always visible */}
-        <div className="mb-8">
-          <div className="inline-block px-6 py-2 rounded-full bg-white/10 border border-white/20 mb-4">
-            <span className="text-white/60 text-sm uppercase tracking-widest">
+        <div className="mb-6 sm:mb-8">
+          <div className="inline-block px-4 sm:px-6 py-1.5 sm:py-2 rounded-full bg-white/10 border border-white/20 mb-3 sm:mb-4">
+            <span className="text-white/60 text-xs sm:text-sm uppercase tracking-widest">
               Wave {wave}
             </span>
           </div>
-          <h1 className="text-5xl sm:text-6xl font-black text-white drop-shadow-lg">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white drop-shadow-lg">
             {waveName}
           </h1>
         </div>
         
         {/* Introduction title */}
         {phase !== 'intro' && hasNewItems && introduction && (
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-yellow-400 drop-shadow-md">
+          <div className="mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-yellow-400 drop-shadow-md">
               {introduction.title}
             </h2>
           </div>
@@ -242,7 +244,7 @@ export function WaveIntroScreen({ wave, onComplete }: WaveIntroScreenProps) {
         
         {/* Item introductions */}
         {phase === 'items' && introduction && (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {introduction.items.slice(0, currentItemIndex + 1).map((item, index) => {
               const badge = getTypeBadge(item.type);
               const isLatest = index === currentItemIndex;
@@ -250,7 +252,7 @@ export function WaveIntroScreen({ wave, onComplete }: WaveIntroScreenProps) {
               return (
                 <div 
                   key={item.name}
-                  className={`flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r ${getTypeColor(item.type)} shadow-lg ${
+                  className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-gradient-to-r ${getTypeColor(item.type)} shadow-lg ${
                     isLatest ? 'scale-105' : 'opacity-80'
                   }`}
                   style={{ 
@@ -258,23 +260,23 @@ export function WaveIntroScreen({ wave, onComplete }: WaveIntroScreenProps) {
                   }}
                 >
                   {/* Icon */}
-                  <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
                     <img 
                       src={`${ASSET_PATHS.icons}${item.icon}`}
                       alt={item.name}
-                      className="w-12 h-12 object-contain drop-shadow-md"
+                      className="w-10 h-10 sm:w-12 sm:h-12 object-contain drop-shadow-md"
                     />
                   </div>
                   
                   {/* Text */}
                   <div className="flex-1 text-left">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-bold text-lg text-white">{item.name}</span>
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full ${badge.color} text-white font-bold uppercase`}>
+                      <span className="font-bold text-base sm:text-lg text-white">{item.name}</span>
+                      <span className={`text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full ${badge.color} text-white font-bold uppercase`}>
                         {badge.text}
                       </span>
                     </div>
-                    <p className="text-sm text-white/90">{item.description}</p>
+                    <p className="text-xs sm:text-sm text-white/90">{item.description}</p>
                   </div>
                 </div>
               );
@@ -284,8 +286,8 @@ export function WaveIntroScreen({ wave, onComplete }: WaveIntroScreenProps) {
         
         {/* Loading dots - shown after items or when no new items */}
         {(phase === 'loading' || (phase === 'items' && introduction && currentItemIndex >= introduction.items.length)) && (
-          <div className="mt-6 flex justify-center items-center gap-2">
-            <span className="text-white/60 text-sm">Starting wave</span>
+          <div className="mt-4 sm:mt-6 flex justify-center items-center gap-2">
+            <span className="text-white/60 text-xs sm:text-sm">Starting wave</span>
             <div className="flex gap-1">
               {[0, 1, 2].map(i => (
                 <div 
@@ -300,16 +302,18 @@ export function WaveIntroScreen({ wave, onComplete }: WaveIntroScreenProps) {
         
         {/* Controls hint for wave 1 */}
         {wave === 1 && phase === 'intro' && (
-          <div className="mt-8">
-            <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/10 border border-white/20">
+          <div className="mt-6 sm:mt-8">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white/10 border border-white/20">
               <div className="flex gap-1">
-                <kbd className="px-2 py-1 rounded bg-white/20 text-white text-sm font-mono">A</kbd>
-                <kbd className="px-2 py-1 rounded bg-white/20 text-white text-sm font-mono">D</kbd>
+                <kbd className="px-2 py-1 rounded bg-white/20 text-white text-xs sm:text-sm font-mono">A</kbd>
+                <kbd className="px-2 py-1 rounded bg-white/20 text-white text-xs sm:text-sm font-mono">D</kbd>
               </div>
-              <span className="text-white/70 text-sm">or Arrow Keys to move</span>
+              <span className="text-white/70 text-xs sm:text-sm">or Arrow Keys to move</span>
             </div>
           </div>
         )}
+        </div>
+        </div>
       </div>
     </div>
   );

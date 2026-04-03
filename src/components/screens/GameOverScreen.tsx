@@ -26,7 +26,7 @@ export function GameOverScreen({
 }: GameOverScreenProps) {
   return (
     <div 
-      className="absolute inset-0 flex flex-col items-center justify-center"
+      className="absolute inset-0 flex items-center justify-center overflow-hidden"
       style={{
         backgroundImage: `url(${ASSET_PATHS.background}background.png)`,
         backgroundSize: 'cover',
@@ -36,29 +36,30 @@ export function GameOverScreen({
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
       
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 animate-fade-in">
+      {/* Scrollable Content Container */}
+      <div className="relative z-10 w-full h-full overflow-y-auto overflow-x-hidden">
+        <div className="min-h-full flex flex-col items-center justify-center text-center px-4 py-8 sm:px-6 animate-fade-in">
         {/* Sad character */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <img
             src={`${ASSET_PATHS.icons}character-sad.png`}
             alt="Game Over"
-            className="w-20 h-20 drop-shadow-lg"
+            className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-lg"
           />
         </div>
         
         {/* Game Over Title */}
-        <h1 className="text-4xl md:text-5xl font-black text-white drop-shadow-lg mb-2">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white drop-shadow-lg mb-2">
           Game Over
         </h1>
         
         {/* Wave reached */}
-        <p className="text-white/60 mb-8">
+        <p className="text-sm sm:text-base text-white/60 mb-4 sm:mb-6">
           Reached Wave {waveReached}
         </p>
         
         {/* Score Card */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 mb-8 min-w-[250px]">
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 w-full max-w-[280px]">
           {/* New High Score Badge */}
           {isNewHighScore && (
             <div className="mb-3 px-4 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-semibold animate-pulse">
@@ -67,28 +68,28 @@ export function GameOverScreen({
           )}
           
           {/* Score */}
-          <div className="mb-4">
-            <div className="text-white/50 text-sm uppercase tracking-wider mb-1">
+          <div className="mb-3 sm:mb-4">
+            <div className="text-white/50 text-xs sm:text-sm uppercase tracking-wider mb-1">
               Final Score
             </div>
-            <div className="text-4xl font-black text-white">
+            <div className="text-3xl sm:text-4xl font-black text-white">
               {formatScore(score)}
             </div>
           </div>
           
           {/* High Score */}
-          <div className="pt-4 border-t border-white/10">
-            <div className="text-white/50 text-sm uppercase tracking-wider mb-1">
+          <div className="pt-3 sm:pt-4 border-t border-white/10">
+            <div className="text-white/50 text-xs sm:text-sm uppercase tracking-wider mb-1">
               Best Score
             </div>
-            <div className="text-2xl font-bold text-primary">
+            <div className="text-xl sm:text-2xl font-bold text-primary">
               {formatScore(highScore)}
             </div>
           </div>
         </div>
         
         {/* Buttons */}
-        <div className="flex flex-col gap-3 w-full max-w-[250px]">
+        <div className="flex flex-col gap-2 sm:gap-3 w-full max-w-[280px]">
           <Button
             onClick={onPlayAgain}
             variant="primary"
@@ -105,6 +106,7 @@ export function GameOverScreen({
           >
             Main Menu
           </Button>
+        </div>
         </div>
       </div>
     </div>
