@@ -765,6 +765,10 @@ export function useGameEngine(options: UseGameEngineOptions = {}) {
     }
   }, []);
 
+  const handleTouchStart = useCallback((x: number) => {
+    inputRef.current.touchX = x;
+  }, []);
+
   const handleTouchMove = useCallback((x: number) => {
     inputRef.current.touchX = x;
   }, []);
@@ -850,6 +854,7 @@ export function useGameEngine(options: UseGameEngineOptions = {}) {
     swapAbilities,
     handleKeyDown,
     handleKeyUp,
+    handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
     updateContainerSize,

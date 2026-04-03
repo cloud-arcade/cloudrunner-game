@@ -58,6 +58,16 @@ export function AbilityBar({
     setDragOverSlot(null);
   }, []);
 
+  // Handle touch events for mobile - prevent propagation to game area
+  const handleTouchEnd = useCallback((e: React.TouchEvent, slot: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const storedAbility = abilities.find(a => a.slot === slot);
+    if (storedAbility) {
+      onUseAbility(slot);
+    }
+  }, [abilities, onUseAbility]);
+
   const slotSize = compact ? 'w-10 h-10' : 'w-14 h-14';
   const iconSize = compact ? 'w-6 h-6' : 'w-9 h-9';
   const keySize = compact ? 'w-3.5 h-3.5 text-[8px]' : 'w-5 h-5 text-[10px]';
@@ -77,6 +87,7 @@ export function AbilityBar({
           <button
             key={i}
             onClick={() => storedAbility && onUseAbility(i)}
+            onTouchEnd={(e) => handleTouchEnd(e, i)}
             draggable={!!storedAbility && !!onSwapAbilities}
             onDragStart={(e) => storedAbility && handleDragStart(e, i)}
             onDragOver={(e) => handleDragOver(e, i)}

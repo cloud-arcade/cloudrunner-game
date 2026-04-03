@@ -31,7 +31,12 @@ export function GameHUD({
   onPause 
 }: GameHUDProps) {
   return (
-    <div className="absolute top-0 left-0 right-0 p-3 flex items-center justify-between z-10">
+    <div 
+      className="absolute top-0 left-0 right-0 p-3 flex items-center justify-between z-10"
+      onTouchStart={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      onTouchEnd={(e) => e.stopPropagation()}
+    >
       {/* Left side - Wave info & Timer */}
       <div className="flex flex-col gap-2">
         <div className="px-3 py-1 bg-black/40 backdrop-blur-sm rounded-lg">
@@ -62,6 +67,11 @@ export function GameHUD({
         />
         <button
           onClick={onPause}
+          onTouchEnd={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onPause();
+          }}
           className="w-10 h-10 flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg hover:bg-black/60 transition-colors"
           aria-label="Pause"
         >

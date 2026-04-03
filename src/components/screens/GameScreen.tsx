@@ -40,6 +40,7 @@ interface GameScreenProps {
   onSwapAbilities: (from: number, to: number) => void;
   onKeyDown: (key: string) => void;
   onKeyUp: (key: string) => void;
+  onTouchStart: (x: number) => void;
   onTouchMove: (x: number) => void;
   onTouchEnd: () => void;
   onResize: (width: number, height: number) => void;
@@ -54,6 +55,7 @@ export function GameScreen({
   onSwapAbilities,
   onKeyDown,
   onKeyUp,
+  onTouchStart,
   onTouchMove,
   onTouchEnd,
   onResize,
@@ -155,6 +157,22 @@ export function GameScreen({
   }, [onKeyDown, onKeyUp]);
   
   // Touch input
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    // Only handle touch if it's not on an interactive element (buttons, etc.)
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'BUTTON' || target.closest('button')) {
+      return; // Let button handle it
+    }
+    
+    if (e.touches.length > 0) {
+      const rect = gameAreaRef.current?.getBoundingClientRect();
+      if (rect) {
+        const x = e.touches[0].clientX - rect.left;
+        onTouchStart(x);
+      }
+    }
+  }, [onTouchStart]);
+
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     e.preventDefault();
     if (e.touches.length > 0) {
@@ -172,6 +190,7 @@ export function GameScreen({
       <div 
         ref={gameAreaRef}
         className="absolute inset-0 touch-none select-none overflow-hidden"
+        onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={onTouchEnd}
         onTouchCancel={onTouchEnd}
@@ -280,6 +299,9 @@ export function GameScreen({
         <div 
           className="absolute bottom-0 left-0 right-0 z-20"
           style={{ height: `${GAME_CONSTANTS.BOTTOM_HUD_HEIGHT}px` }}
+          onTouchStart={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+          onTouchEnd={(e) => e.stopPropagation()}
         >
           {/* Subtle gradient overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent" />

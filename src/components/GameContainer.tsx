@@ -72,6 +72,7 @@ export function GameContainer() {
     swapAbilities,
     handleKeyDown,
     handleKeyUp,
+    handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
     updateContainerSize,
@@ -138,6 +139,7 @@ export function GameContainer() {
             onSwapAbilities={swapAbilities}
             onKeyDown={handleKeyDown}
             onKeyUp={handleKeyUp}
+            onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onResize={updateContainerSize}
