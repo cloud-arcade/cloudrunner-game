@@ -164,6 +164,8 @@ export function GameScreen({
       return; // Let button handle it
     }
     
+    e.preventDefault(); // Prevent scrolling and other default behaviors
+    
     if (e.touches.length > 0) {
       const rect = gameAreaRef.current?.getBoundingClientRect();
       if (rect) {

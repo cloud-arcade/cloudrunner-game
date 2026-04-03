@@ -461,21 +461,39 @@ export function useGameEngine(options: UseGameEngineOptions = {}) {
       let newVelocityX = prev.player.velocityX;
       let newPlayerX = prev.player.x;
       
-      // Smooth keyboard movement with acceleration
-      if (input.left && !input.right) {
+      // Touch/drag movement - directly follow touch position with smooth interpolation
+      if (input.touchX !== null) {
+        const targetX = input.touchX - prev.player.width / 2; // Center player on touch
+        const diff = targetX - newPlayerX;
+        
+        // Use smooth interpolation for touch movement
+        const touchSpeed = 0.25; // Responsive but smooth - adjust to taste
+        newPlayerX += diff * touchSpeed;
+        
+        // Update velocity based on movement for momentum
+        newVelocityX = diff * touchSpeed;
+      } 
+      // Keyboard movement with acceleration (only when not touching)
+      else if (input.left && !input.right) {
         newVelocityX -= GAME_CONSTANTS.PLAYER_ACCELERATION * deltaTime;
+        // Update position
+        newPlayerX += newVelocityX * deltaTime;
       } else if (input.right && !input.left) {
         newVelocityX += GAME_CONSTANTS.PLAYER_ACCELERATION * deltaTime;
+        // Update position
+        newPlayerX += newVelocityX * deltaTime;
       } else {
         // Apply friction when no input
         newVelocityX *= GAME_CONSTANTS.PLAYER_FRICTION;
+        // Update position
+        newPlayerX += newVelocityX * deltaTime;
       }
       
       // Clamp velocity
       newVelocityX = clamp(newVelocityX, -GAME_CONSTANTS.PLAYER_MAX_SPEED, GAME_CONSTANTS.PLAYER_MAX_SPEED);
       
       // Apply friction when no directional input
-      if (!input.left && !input.right) {
+      if (!input.left && !input.right && input.touchX === null) {
         newVelocityX *= GAME_CONSTANTS.PLAYER_FRICTION;
       }
       
@@ -483,9 +501,6 @@ export function useGameEngine(options: UseGameEngineOptions = {}) {
       if (Math.abs(newVelocityX) < 0.1) {
         newVelocityX = 0;
       }
-      
-      // Update position
-      newPlayerX += newVelocityX * deltaTime;
       
       // Clamp position with padding and soft bounce
       const minX = GAME_CONSTANTS.PLAYER_EDGE_PADDING;
